@@ -1,10 +1,11 @@
+import {Transition, StateService}
 import {Http} from "@angular/http";
 import {BazListComponent} from "./bazList.component";
 import {BazDetailsComponent} from "./bazDetail.component";
 import {BazFooterComponent} from "./bazFooter.component";
 /**
  * This file defines the states for the `baz` module.
- * The states are exported as an array.  
+ * The states are exported as an array.
  * The parent module imports this array and concats them into the master state list.
  */
 
@@ -52,6 +53,11 @@ export let BAZ_STATES = [
       '$default@app': { component: BazDetailsComponent }
     },
     resolve: { bazDetail }
+    onEnter: (stateService: StateService, $transition$: Transition) => {
+      return stateService.target(
+        'app.bar.details',
+        {barId: $transition$.params().bazId})
+    }
   },
 ];
 

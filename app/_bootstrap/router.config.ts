@@ -1,4 +1,4 @@
-import {UIRouter} from "ui-router-ng2/router";
+import {UIRouter, StateService} from "ui-router-ng2";
 import {INITIAL_STATES} from "../app.states";
 import {Http} from "@angular/http";
 import {Injectable, Injector} from "@angular/core";
@@ -29,5 +29,6 @@ export class MyUIRouterConfig {
     let rootState = uiRouter.stateRegistry.root();
 
     rootState.resolve['http'] = () => this.injector.get(Http);
+    rootState.resolve['stateService'] = () => this.injector.get(StateService);
   }
 }
